@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs";
 import prismadb from "@/lib/prismadb";
 
-export async function PATCH(
+export async function PATCH (
     req: Request,
     { params }: { params: { storeId: string }}
 ) {
@@ -60,7 +60,7 @@ export async function DELETE(
             where: {
                 id: params.storeId,
                 userId
-            },
+            }
         });
 
         return NextResponse.json(store);
