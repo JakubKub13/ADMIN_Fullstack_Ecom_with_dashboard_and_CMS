@@ -1,6 +1,6 @@
 "use client";
 
-import { Billboard } from "@prisma/client";
+import { Category } from "@prisma/client";
 import axios from "axios";
 import { Heading } from "@/components/ui/heading";
 import { Button } from "@/components/ui/button";
@@ -19,17 +19,17 @@ import { useOrigin } from "@/hooks/use-origin";
 import ImageUpload from "@/components/ui/image-upload";
 
 const formSchema = z.object({
-    label: z.string().min(1),
-    imageUrl: z.string().min(1),
+    name: z.string().min(1),
+    billboardId: z.string().min(1),
 });
 
-type BillboardFormValues = z.infer<typeof formSchema>
+type CategoryFormValues = z.infer<typeof formSchema>
 
-interface BillboardFormProps {
-    initialData: Billboard | null;
+interface CategoryFormProps {
+    initialData: Category | null;
 }
 
-export const BillboardForm: React.FC<BillboardFormProps> = ({
+export const CategoryForm: React.FC<CategoryFormProps> = ({
     initialData
 }) => {
         const params = useParams();
@@ -43,7 +43,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
         const toastMessage = initialData ? "Billboard updated" : "Billboard created";
         const action = initialData ? "Save changes" : "Create";
 
-        const form = useForm<BillboardForm>({
+        const form = useForm<CategoryForm>({
             resolver: zodResolver(formSchema),
             defaultValues: initialData || {
                 label: '',
@@ -51,7 +51,7 @@ export const BillboardForm: React.FC<BillboardFormProps> = ({
             }
         });
 
-        const onSubmit = async (data: BillboardFormValues) => {
+        const onSubmit = async (data: CategoryFormValues) => {
             try {
                 setLoading(true);
 
